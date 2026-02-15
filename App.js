@@ -4,6 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeStack from './navigation/HomeStack';
 import MainTabs from './navigation/MainTabs';
+import { AuthProvider } from './context/AuthContext';
+import { BookingProvider } from './context/BookingContext';
+
 import {
   SearchScreen,
   MessagesScreen,
@@ -16,8 +19,12 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-     <MainTabs />
-    </NavigationContainer>
+    <AuthProvider>
+      <BookingProvider>
+        <NavigationContainer>
+          <MainTabs />
+        </NavigationContainer>
+      </BookingProvider>
+    </AuthProvider>
   );
 }

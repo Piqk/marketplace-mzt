@@ -6,6 +6,9 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
+import { useAuth } from '../context/AuthContext';
+import { useBookings } from '../context/BookingContext';
+
 
 const COLORS = {
   primary: '#0EA5E9',
@@ -20,16 +23,36 @@ export default function BookingScreen({ route, navigation }) {
   const { provider, packageItem } = route.params;
 
   const [selectedDate, setSelectedDate] = useState(null);
- const isLoggedIn = false;
+  const { user } = useAuth();
+  const { createBooking } = useBookings();
+
+// esta es la logica de resrva
+
   const handleConfirm = () => {
-  if (!isLoggedIn) {
+  if (!user) {
     navigation.navigate('Register');
     return;
   }
 
-  alert('Reserva creada (simulación)');
-  navigation.goBack();
+  if (!selectedDate) {
+    alert('Selecciona una fecha');
+    return;
+  }
+
+  createBooking({
+    providerId: provider.id,
+    providerName: provider.name,
+    packageName: packageItem.name,
+    price: packageItem.price,
+    date: selectedDate,
+    buyerId: user.id,
+  });
+
+  alert('Reserva creada');
+
+  navigation.navigate('MyBookings');
 };
+
 
   return (
     <SafeAreaView style={styles.container}>

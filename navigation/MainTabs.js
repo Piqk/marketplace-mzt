@@ -7,7 +7,7 @@ import {
   MessagesScreen,
   FavoritesScreen,
 } from '../OtherScreens';
-
+import MyBookingsScreen from '../screens/MyBookingsScreen';
 const Tab = createBottomTabNavigator();
 
 export default function MainTabs() {
@@ -16,7 +16,7 @@ export default function MainTabs() {
       <Tab.Screen name="Inicio" component={HomeStack} />
       <Tab.Screen name="Buscar" component={SearchScreen} />
       <Tab.Screen name="Mensajes" component={MessagesScreen} />
-      <Tab.Screen name="Favoritos" component={FavoritesScreen} />
+      <Tab.Screen name="Mis reservas" component={MyBookingsScreen} />
     </Tab.Navigator>
   );
 }
