@@ -24,7 +24,10 @@ const ProviderCard = ({ provider, navigation }) => (
   <TouchableOpacity
     style={styles.providerCard}
     onPress={() =>
-      navigation.navigate('ProviderDetail', { provider })
+      navigation.navigate('Inicio', {
+  screen: 'ProviderDetail',
+  params: { provider },
+})
     }
   >
     <Text style={styles.providerName}>{provider.name}</Text>
@@ -55,7 +58,8 @@ export function SearchScreen({ navigation }) {
       ? categoryMatches
       : providers.filter((provider) =>
           provider.name.toLowerCase().includes(query)
-        );
+  
+    );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,13 +79,16 @@ export function SearchScreen({ navigation }) {
             provider={provider}
             navigation={navigation}
           />
+          
         ))}
+        
 
         {filteredProviders.length === 0 && (
           <Text style={styles.emptyText}>
             No se encontraron resultados.
           </Text>
         )}
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -131,18 +138,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export function MessagesScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Mensajes</Text>
-    </View>
-  );
-}
-
-export function FavoritesScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Proximamente se podran agregar favoritos</Text>
-    </View>
-  );
-}

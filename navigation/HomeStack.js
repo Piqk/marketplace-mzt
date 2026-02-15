@@ -7,6 +7,9 @@ import BookingScreen from '../screens/BookingScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import MyBookingsScreen from '../screens/MyBookingsScreen';
+import ChatScreen from '../screens/ChatScreen';
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -45,10 +48,16 @@ export default function HomeStack() {
         options={{ title: 'Iniciar sesión' }}
       />
       <Stack.Screen
-        name="MyBookings"
+        name="Mis reservas"
         component={MyBookingsScreen}
-        options={{ title: 'Mis reservas' }}
+        initialParams={{ title: 'MyBookings' }}
       />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ title: 'Chat' }}
+      />
+    
     </Stack.Navigator>
   );
 }

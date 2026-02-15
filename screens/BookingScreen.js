@@ -50,7 +50,7 @@ export default function BookingScreen({ route, navigation }) {
 
   alert('Reserva creada');
 
-  navigation.navigate('MyBookings');
+  navigation.navigate('Mis reservas');
 };
 
 

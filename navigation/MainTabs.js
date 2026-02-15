@@ -4,10 +4,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeStack';
 import {
   SearchScreen,
-  MessagesScreen,
-  FavoritesScreen,
+
 } from '../OtherScreens';
 import MyBookingsScreen from '../screens/MyBookingsScreen';
+import BookingsStack from './BookingsStack';
+
+
+
+import MessagesScreen from '../screens/MessagesScreen';
 const Tab = createBottomTabNavigator();
 
 export default function MainTabs() {
@@ -16,7 +20,7 @@ export default function MainTabs() {
       <Tab.Screen name="Inicio" component={HomeStack} />
       <Tab.Screen name="Buscar" component={SearchScreen} />
       <Tab.Screen name="Mensajes" component={MessagesScreen} />
-      <Tab.Screen name="Mis reservas" component={MyBookingsScreen} />
+      <Tab.Screen name="Mis reservas" component={BookingsStack} />
     </Tab.Navigator>
   );
 }

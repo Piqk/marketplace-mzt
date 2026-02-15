@@ -6,6 +6,9 @@ import HomeStack from './navigation/HomeStack';
 import MainTabs from './navigation/MainTabs';
 import { AuthProvider } from './context/AuthContext';
 import { BookingProvider } from './context/BookingContext';
+import { ChatProvider } from './context/ChatContext';
+
+
 
 import {
   SearchScreen,
@@ -21,9 +24,11 @@ export default function App() {
   return (
     <AuthProvider>
       <BookingProvider>
-        <NavigationContainer>
-          <MainTabs />
-        </NavigationContainer>
+        <ChatProvider>
+            <NavigationContainer>
+              <MainTabs />
+            </NavigationContainer>
+        </ChatProvider>
       </BookingProvider>
     </AuthProvider>
   );

@@ -7,6 +7,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useBookings } from '../context/BookingContext';
+import { TouchableOpacity } from 'react-native';
+
 
 const COLORS = {
   primary: '#0EA5E9',
@@ -17,40 +19,50 @@ const COLORS = {
   border: '#E2E8F0',
 };
 
-export default function MyBookingsScreen() {
+export default function MyBookingsScreen({navigation}) {
   const { bookings } = useBookings();
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Mis reservas</Text>
+       <ScrollView>
+  {bookings.map((booking) => (
+    <TouchableOpacity
+      key={booking.id}
+      style={styles.card}
+      onPress={() =>
+        navigation.navigate('Chat', { booking })
+      }
+    >
+      <Text style={styles.provider}>
+        {booking.providerName}
+      </Text>
+      <Text style={styles.package}>
+        {booking.packageName}
+      </Text>
+      <Text style={styles.date}>
+        Fecha: {booking.date}
+      </Text>
+      <Text style={styles.price}>
+        ${booking.price} MXN
+      </Text>
+      <Text style={styles.status}>
+        Estado: {booking.status}
+      </Text>
 
-      <ScrollView>
-        {bookings.map((booking) => (
-          <View key={booking.id} style={styles.card}>
-            <Text style={styles.provider}>
-              {booking.providerName}
-            </Text>
-            <Text style={styles.package}>
-              {booking.packageName}
-            </Text>
-            <Text style={styles.date}>
-              Fecha: {booking.date}
-            </Text>
-            <Text style={styles.price}>
-              ${booking.price} MXN
-            </Text>
-            <Text style={styles.status}>
-              Estado: {booking.status}
-            </Text>
-          </View>
-        ))}
+      <Text style={styles.chatLink}>
+        Contactar proveedor
+      </Text>
+    </TouchableOpacity>
+  ))}
 
-        {bookings.length === 0 && (
-          <Text style={styles.empty}>
-            Aún no tienes reservas.
-          </Text>
-        )}
-      </ScrollView>
+  {bookings.length === 0 && (
+    <Text style={styles.empty}>
+      Aún no tienes reservas.
+    </Text>
+  )}
+      </ScrollView> 
+       
     </SafeAreaView>
   );
 }
@@ -100,4 +112,9 @@ const styles = StyleSheet.create({
     marginTop: 40,
     color: COLORS.textLight,
   },
+  chatLink: {
+  marginTop: 8,
+  color: COLORS.primary,
+  fontWeight: 'bold',
+},
 });
