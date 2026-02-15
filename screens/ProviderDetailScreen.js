@@ -329,11 +329,13 @@ export default function ProviderDetailScreen({ route, navigation }) {
         <TouchableOpacity
           style={styles.actionButton}
           onPress={() => {
-            // Aquí irá la lógica para verificar disponibilidad
-            console.log('Verificar disponibilidad');
-            // Por ejemplo:
-            // navigation.navigate('Booking', { provider: providerDetails });
-          }}
+          const firstPackage = providerDetails.products[0];
+
+          navigation.navigate('Booking', {
+          provider: providerDetails,
+          packageItem: firstPackage,
+          });
+        }}
         >
           <Text style={styles.actionButtonText}>Verificar Disponibilidad</Text>
         </TouchableOpacity>

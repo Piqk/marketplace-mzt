@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CategoryProvidersScreen from '../screens/CategoryProvidersScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ProviderDetailScreen from '../screens/ProviderDetailScreen';
-
+import BookingScreen from '../screens/BookingScreen';
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
@@ -23,7 +23,12 @@ export default function HomeStack() {
         name="CategoryProviders"
         component={CategoryProvidersScreen}
         options={{ title: 'Categoría' }}
-    />
+      />
+      <Stack.Screen
+        name="Booking"
+        component={BookingScreen}
+        options={{ title: 'Reservar' }}
+      />
     </Stack.Navigator>
   );
 }
