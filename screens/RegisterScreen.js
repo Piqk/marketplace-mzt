@@ -19,22 +19,19 @@ const COLORS = {
 
 export default function RegisterScreen({ navigation, route }) {
   const { register } = useAuth();
-
+  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleRegister = () => {
-    const newUser = {
-      id: Date.now(),
-      name,
-      email,
-    };
-
-    register(newUser);
-
-    // regresar a la pantalla anterior
+  const handleRegister = async () => {
+  try {
+    await register(email, password, 'buyer');
     navigation.goBack();
-  };
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,6 +49,13 @@ export default function RegisterScreen({ navigation, route }) {
         style={styles.input}
         value={email}
         onChangeText={setEmail}
+      />
+      <TextInput
+        placeholder="Contraseña"
+        style={styles.input}
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
       />
 
       <TouchableOpacity

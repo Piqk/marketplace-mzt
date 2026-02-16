@@ -19,19 +19,18 @@ const COLORS = {
 
 export default function LoginScreen({ navigation }) {
   const { login } = useAuth();
-
+  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleLogin = () => {
-    const fakeUser = {
-      id: 1,
-      name: 'Usuario',
-      email,
-    };
-
-    login(fakeUser);
+  const handleLogin = async () => {
+  try {
+    await login(email, password);
     navigation.goBack();
-  };
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +42,13 @@ export default function LoginScreen({ navigation }) {
         value={email}
         onChangeText={setEmail}
       />
-
+      <TextInput
+        placeholder="Contraseña"
+        style={styles.input}
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
       <TouchableOpacity
         style={styles.button}
         onPress={handleLogin}

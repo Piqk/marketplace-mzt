@@ -251,28 +251,48 @@ export default function ProviderDetailScreen({ route, navigation }) {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Paquetes y Precios</Text>
             {providerDetails.products.map((product) => (
-              <View key={product.id} style={styles.productCard}>
-                <View style={styles.productHeader}>
-                  <View style={styles.productIconContainer}>
-                    <Text style={styles.productIcon}>{product.icon}</Text>
-                  </View>
-                  <View style={styles.productInfo}>
-                    <Text style={styles.productName}>{product.name}</Text>
-                    <Text style={styles.productDescription}>
-                      {product.description}
-                    </Text>
-                    <View style={styles.productDetails}>
-                      <Text style={styles.productDuration}>
-                        ⏱️ {product.duration}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.productFooter}>
-                  <Text style={styles.productPrice}>${product.price} MXN</Text>
-                </View>
-              </View>
-            ))}
+  <View key={product.id} style={styles.productCard}>
+    <View style={styles.productHeader}>
+      <View style={styles.productIconContainer}>
+        <Text style={styles.productIcon}>{product.icon}</Text>
+      </View>
+      <View style={styles.productInfo}>
+        <Text style={styles.productName}>{product.name}</Text>
+        <Text style={styles.productDescription}>
+          {product.description}
+        </Text>
+        <View style={styles.productDetails}>
+          <Text style={styles.productDuration}>
+            ⏱️ {product.duration}
+          </Text>
+        </View>
+      </View>
+    </View>
+
+    <View style={styles.productFooter}>
+      <Text style={styles.productPrice}>
+        ${product.price} MXN
+      </Text>
+
+      <TouchableOpacity
+        style={styles.reserveButton}
+        onPress={() =>
+          navigation.navigate('Booking', {
+            provider: providerDetails,
+            packageItem: product,
+          })
+        }
+      >
+        <Text style={styles.reserveButtonText}>
+          Reservar
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+))}
+
+
+
           </View>
 
           {/* RESEÑAS */}
@@ -320,26 +340,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
         </View>
       </ScrollView>
 
-      {/* BOTÓN DE ACCIÓN FLOTANTE */}
-      <View style={styles.floatingButtonContainer}>
-        <View style={styles.priceInfo}>
-          <Text style={styles.priceLabel}>Desde</Text>
-          <Text style={styles.priceAmount}>${providerDetails.priceFrom} MXN</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => {
-          const firstPackage = providerDetails.products[0];
 
-          navigation.navigate('Booking', {
-          provider: providerDetails,
-          packageItem: firstPackage,
-          });
-        }}
-        >
-          <Text style={styles.actionButtonText}>Verificar Disponibilidad</Text>
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 }
@@ -349,6 +350,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+
+
+  reserveButton: {
+  backgroundColor: COLORS.primary,
+  paddingHorizontal: 16,
+  paddingVertical: 10,
+  borderRadius: 10,
+},
+
+reserveButtonText: {
+  color: COLORS.white,
+  fontWeight: 'bold',
+},
 
   // Header
   header: {
