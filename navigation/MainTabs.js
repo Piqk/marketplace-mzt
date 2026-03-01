@@ -2,10 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeStack from './HomeStack';
-import {
-  SearchScreen,
-
-} from '../OtherScreens';
+import SearchScreen from '../screens/SearchScreen';
 import MyBookingsScreen from '../screens/MyBookingsScreen';
 import BookingsStack from './BookingsStack';
 

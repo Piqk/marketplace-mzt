@@ -10,11 +10,6 @@ import { ChatProvider } from './context/ChatContext';
 
 
 
-import {
-  SearchScreen,
-  MessagesScreen,
-  FavoritesScreen,
-} from './OtherScreens';
 
 const Tab = createBottomTabNavigator();
 
