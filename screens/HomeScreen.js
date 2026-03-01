@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { providers } from '../data/providers';
+import React, { useState, useEffect } from 'react';
+import { getProviders } from '../data/providers';
 import {
   StyleSheet,
   Text,
@@ -86,6 +86,16 @@ const ProviderCard = ({ provider, navigation }) => {
 
 export default function HomeScreen({ navigation }) {
     const [searchQuery, setSearchQuery] = useState('');
+    const [providers, setProviders] = useState([]);
+
+      useEffect(() => {
+        const loadProviders = async () => {
+          const data = await getProviders();
+          setProviders(data);
+        };
+
+        loadProviders();
+      }, []);
 
   // DATOS DE EJEMPLO - Aquí conectarías tu API o base de datos
   const categories = [
@@ -98,6 +108,7 @@ export default function HomeScreen({ navigation }) {
 const featuredProviders = providers;
 
 const query = searchQuery.toLowerCase().trim();
+
 
 // 1. Buscar coincidencias por categoría (servicio)
 const categoryMatches = featuredProviders.filter((provider) =>
@@ -126,7 +137,12 @@ const filteredProviders =
             <Text style={styles.headerSubtitle}>ya luego pensare en esto y le podnre color</Text>
           </View>
           <TouchableOpacity style={styles.profileButton}>
-            <Text style={styles.profileIcon}>👤</Text>
+            <TouchableOpacity
+              style={styles.profileButton}
+              onPress={() => navigation.navigate('Profile')}
+            >
+              <Text style={styles.profileIcon}>👤</Text>
+</TouchableOpacity>
           </TouchableOpacity>
         </View>
 

@@ -1,32 +1,25 @@
-export const providers = [
-  {
-    id: 1,
-    icon: '🎵',
-    name: 'DJ Sound Wave',
-    category: 'DJ & Música',
-    rating: 4.9,
-    reviews: 47,
-    priceFrom: 3500,
+import { supabase } from '../services/supabase';
+
+export async function getProviders() {
+  const { data, error } = await supabase
+    .from('providers')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.log('Error fetching providers:', error);
+    return [];
+  }
+
+  // Adaptar al formato que tu UI ya usa
+  return data.map((provider) => ({
+    id: provider.id,
+    name: provider.name,
+    category: provider.category,
+    description: provider.description,
+    priceFrom: provider.price_from,
+    rating: 5, // temporal hasta que hagas sistema de reviews real
+    reviews: 0,
     verified: true,
-  },
-  {
-    id: 2,
-    icon: '🎈',
-    name: 'Decoraciones Mágicas',
-    category: 'Decoración',
-    rating: 4.8,
-    reviews: 32,
-    priceFrom: 2000,
-    verified: true,
-  },
-  {
-    id: 3,
-    icon: '📸',
-    name: 'Foto Memories',
-    category: 'Fotografía',
-    rating: 5.0,
-    reviews: 61,
-    priceFrom: 4000,
-    verified: true,
-  },
-];
+  }));
+}

@@ -22,19 +22,25 @@ const COLORS = {
 export default function ChatScreen({ route }) {
   const { booking } = route.params;
   const { user } = useAuth();
-  const { sendMessage, getMessagesForBooking } = useChat();
+  const { sendMessage, fetchMessages, subscribeToMessages, messages } = useChat();
 
   const [text, setText] = useState('');
 
-  const messages = getMessagesForBooking(booking.id);
+  useEffect(() => {
+  fetchMessages(booking.id);
+  const unsubscribe = subscribeToMessages(booking.id);
+
+  return () => {
+    unsubscribe();
+  };
+}, [booking.id]);
 
   const handleSend = () => {
     if (!text.trim()) return;
 
     sendMessage({
-      bookingId: booking.id,
-      senderId: user.id,
-      text,
+        bookingId: booking.id,
+        text,
     });
 
     setText('');

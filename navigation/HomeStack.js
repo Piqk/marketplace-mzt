@@ -8,7 +8,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import MyBookingsScreen from '../screens/MyBookingsScreen';
 import ChatScreen from '../screens/ChatScreen';
-
+import ProfileScreen from '../screens/ProfileScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -57,7 +57,11 @@ export default function HomeStack() {
         component={ChatScreen}
         options={{ title: 'Chat' }}
       />
-    
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ title: 'Mi perfil' }}
+      />
     </Stack.Navigator>
   );
 }

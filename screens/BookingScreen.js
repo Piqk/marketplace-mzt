@@ -41,11 +41,10 @@ export default function BookingScreen({ route, navigation }) {
 
   createBooking({
     providerId: provider.id,
-    providerName: provider.name,
-    packageName: packageItem.name,
-    price: packageItem.price,
-    date: selectedDate,
-    buyerId: user.id,
+  packageName: packageItem.name,
+  price: packageItem.price,
+  date: selectedDate,
+
   });
 
   alert('Reserva creada');
@@ -72,7 +71,7 @@ export default function BookingScreen({ route, navigation }) {
         {/* Simulación de selección de fecha */}
         <TouchableOpacity
           style={styles.dateButton}
-          onPress={() => setSelectedDate('20 Dic 2026')}
+          onPress={() => setSelectedDate('2026-12-20')}
         >
           <Text style={styles.dateText}>
             {selectedDate || 'Seleccionar fecha'}
